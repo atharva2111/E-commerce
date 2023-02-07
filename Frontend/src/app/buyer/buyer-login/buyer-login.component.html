@@ -1,0 +1,28 @@
+
+<div class="center">
+    <div ><h2>Login Credentials</h2></div>
+        
+    <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()">        
+      <div>  
+        <label for="inputUserName">UserName</label>
+        <input class="form-control" type="text" 
+                
+                placeholder="Username"
+                
+                formControlName="username"
+                
+              >
+      </div>
+      <div>
+        <label for="inputPassword">Password</label>
+        <input class="form-control" type="password" 
+                
+                placeholder="Password"
+                
+                formControlName="password"
+                
+              >
+      </div>
+      <button class="button" type="submit">Login</button>
+      </form>
+    

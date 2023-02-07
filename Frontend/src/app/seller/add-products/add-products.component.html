@@ -1,0 +1,41 @@
+<br>
+<div class='center'>
+<div ><h2>Add New Product</h2></div>
+
+    <form [formGroup]="AddProduct" (ngSubmit)="addProduct()">    
+        <div class="form-group">
+          <label for="inputProductName">Product Name</label>
+          <input class="form-control" type="text" 
+            
+            placeholder="Product Name"
+            
+            formControlName="name"
+          >
+        </div>
+        
+        <div class="form-group">
+        <label for="inputPrice">Price</label>
+        <input class="form-control" type="number" 
+           
+            placeholder="Price"
+            
+            formControlName="price"
+        >
+        </div>
+
+        <div class="form-group">
+        <label for="inputDescription">Description</label>
+        <input class="form-control" type="text" 
+            
+            placeholder="Description"
+            
+            formControlName="description"
+        >
+        </div>
+
+        <button class="button" type="submit">ADD</button>
+        <br><br>
+      </form>   
+</div>
+
+

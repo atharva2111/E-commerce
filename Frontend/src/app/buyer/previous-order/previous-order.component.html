@@ -1,0 +1,8 @@
+<h1>Previous Order</h1>
+
+<div class="order-item" *ngFor="let item of items">
+  <span>{{ item.name }}</span>
+  <br>
+  <span>{{ item.price | currency }}</span>
+  <br><br>
+</div>

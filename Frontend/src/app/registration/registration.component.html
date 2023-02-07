@@ -1,0 +1,47 @@
+<br>
+<div class='center'>
+<div ><h2>Register New User</h2></div>
+
+    <form [formGroup]="Register" (ngSubmit)="register()">    
+        <div class="form-group">
+          <label for="inputUsername">Username</label>
+          <input class="form-control" type="text" 
+            
+            placeholder="username - should be unique"
+            
+            formControlName="username"
+          >
+        </div>
+        
+        <div class="form-group">
+        <label for="inputEmail">E-mail</label>
+        <input class="form-control" type="text" 
+           
+            placeholder="E-mail id"
+            
+            formControlName="email"
+        >
+        </div>
+
+        <div class="form-group">
+        <label for="inputPassword">Password</label>
+        <input class="form-control" type="text" 
+            
+            placeholder="Password"
+            
+            formControlName="password"
+        >
+        </div>
+
+        <div class="form-group">
+            <select class ="select" formControlName="usertype" id="type">
+                <option *ngFor="let usertype of usertypes"[value]="usertype.type">{{usertype.type}}</option>
+            </select>
+        </div>
+
+        <button class="button" type="submit">Register</button>
+        <br><br>
+      </form>   
+</div>
+
+
