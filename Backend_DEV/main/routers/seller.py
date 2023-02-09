@@ -33,7 +33,7 @@ def addseller(request:schemas.Seller,db:Session = Depends(get_db)):
  
 
 @router.post("/seller/login")
-def login(request:schemas.Login,db:Session=Depends(get_db)):
+async def login(request:schemas.Login,db:Session=Depends(get_db)):
     seller=db.query(models.Seller).filter(models.Seller.username==request.username).first()
     #return seller
     if not seller:
@@ -41,7 +41,7 @@ def login(request:schemas.Login,db:Session=Depends(get_db)):
     if not hash.verify(request.password,seller.password):
         return {"details":"incorrect password"}
 
-    access_token = JWTtoken.create_access_token(data={"sub": seller.username})
+    access_token = await JWTtoken.create_access_token(data={"sub": seller.username})
     return {"access_token": access_token,"token_type":"Bearer"}
         
 #get a specific seller
