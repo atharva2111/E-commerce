@@ -17,10 +17,10 @@ export class BuyerDashboardComponent implements OnInit {
   private FromRoute = String(this.routeParams.get('username'));
   
   previousOrder(){
-    this.router.navigate(['/previous_order'])
+    this.router.navigate(['/previous_order',this.FromRoute])
   }
   checkout(){
-    this.router.navigate(['/buyer',this.FromRoute,"/cart"])
+    this.router.navigate(['/buyer/cart',this.FromRoute])
     console.log(this.router.navigate(['/buyer/cart',this.FromRoute]))
   }
   ngOnInit(): void {

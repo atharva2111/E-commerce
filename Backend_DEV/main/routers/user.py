@@ -46,3 +46,26 @@ def login(request:schemas.Login,db:Session=Depends(get_db)):
 
     access_token = JWTtoken.create_access_token(data={"sub": seller.username})
     return {"access_token": access_token,"token_type":"Bearer"}
+
+
+@router.post("/user/previousOrder/{username}")
+def addOrder(username:str,request:List[schemas.showProduct],db:Session=Depends(get_db)):
+    totalCalc=0
+    user=db.query(models.User).filter(models.User.username==username).first()
+    for i in request:
+        totalCalc=totalCalc+i.price
+    new_order=models.PreviousOrder(
+                            products=request,
+                            total=totalCalc,
+                            user_id=user.id
+                            )
+    db.add(new_order)
+    db.commit()
+    db.refresh(new_order)
+    return new_order
+
+@router.get("/user/previousOrder/{username}")
+def getOrders(username:str,db:Session=Depends(get_db)):
+    user=db.query(models.User).filter(models.User.username==username).first()
+    previous_order=db.query(models.PreviousOrder).filter(models.PreviousOrder.user_id==user.id).all()
+    return previous_order

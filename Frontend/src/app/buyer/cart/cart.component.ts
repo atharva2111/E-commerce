@@ -28,7 +28,7 @@ export class CartComponent implements OnInit{
   }
   OrderPlaced(){
      // add logic to add this order to orders. 
-    this.orderService.PlaceOrder(this.cartService.getItems())
+    this.orderService.PlaceOrder('user/previousOrder/'+this.FromRoute,this.cartService.getItems()).subscribe(res=>{})
     this.cartService.clearCart();
     window.alert('Your order has been placed!');
     this.router.navigate(['/buyer',this.FromRoute]);

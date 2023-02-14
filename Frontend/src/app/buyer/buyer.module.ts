@@ -29,7 +29,7 @@ import { BuyerLoginComponent } from './buyer-login/buyer-login.component';
       { path: 'buyer/login',component: BuyerLoginComponent},
       { path: 'buyer/:username',component: BuyerDashboardComponent},
       { path: 'buyer/cart/:username', component: CartComponent },
-      { path: 'previous_order', component:PreviousOrderComponent},
+      { path: 'previous_order/:username', component:PreviousOrderComponent},
     ])
   ]
 })

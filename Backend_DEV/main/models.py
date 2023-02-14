@@ -1,4 +1,5 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from typing import List
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String,PickleType
 from database import Base
 from enum import Enum 
 from sqlalchemy.orm import relationship
@@ -22,6 +23,18 @@ class User(Base):
     username = Column(String)
     email = Column(String)
     password = Column(String)
+
+    PreviousOrders=relationship("PreviousOrder",back_populates='user')
+
+class PreviousOrder(Base):
+    __tablename__="PreviousOrders"
+
+    id=Column(Integer,primary_key=True,index=True)
+    products=Column(PickleType)
+    total=Column(Integer)
+    user_id=Column(Integer,ForeignKey('users.id'))
+    
+    user=relationship("User",back_populates="PreviousOrders")
 
 class Seller(Base):
     __tablename__="sellers"

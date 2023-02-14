@@ -41,7 +41,7 @@ import { FormsModule } from '@angular/forms';
       { path: 'buyer/login',component: BuyerLoginComponent},
       { path: 'buyer/:username',component: BuyerDashboardComponent},
       { path: 'buyer/cart/:username', component: CartComponent },
-      { path: 'previous_order', component: PreviousOrderComponent},
+      { path: 'previous_order/:username', component: PreviousOrderComponent},
       { path: 'sellers/addProducts/:sellername', component: AddProductsComponent },
       { path: 'sellers/:sellername', component: SellerDashboardComponent },
       { path: 'seller/login', component: SellerLoginComponent},

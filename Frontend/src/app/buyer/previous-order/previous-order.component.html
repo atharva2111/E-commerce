@@ -1,8 +1,13 @@
 <h1>Previous Order</h1>
 
-<div class="order-item" *ngFor="let item of items">
-  <span>{{ item.name }}</span>
+<div  *ngFor="let order of previousOrders">
+  <span class="order-item">Order ID = {{ order.id }}</span>
   <br>
-  <span>{{ item.price | currency }}</span>
+  <div class="product-item" *ngFor="let product of order.products">
+    <span>{{product.name}}</span><br>
+    <span>{{product.price | currency }}</span><br>
+  </div>
+  <span class="order-item">Total = {{order.total | currency}}</span>
+  <br><br>
   <br><br>
 </div>
