@@ -25,6 +25,7 @@ class User(Base):
     password = Column(String)
 
     PreviousOrders=relationship("PreviousOrder",back_populates='user')
+    cart=relationship("Cart",back_populates='user')
 
 class PreviousOrder(Base):
     __tablename__="PreviousOrders"
@@ -35,6 +36,14 @@ class PreviousOrder(Base):
     user_id=Column(Integer,ForeignKey('users.id'))
     
     user=relationship("User",back_populates="PreviousOrders")
+
+class Cart(Base):
+    __tablename__="cart"
+    id=Column(Integer,primary_key=True)
+    products=Column(PickleType)
+    user_id=Column(Integer,ForeignKey('users.id'))
+
+    user=relationship("User",back_populates="cart")
 
 class Seller(Base):
     __tablename__="sellers"

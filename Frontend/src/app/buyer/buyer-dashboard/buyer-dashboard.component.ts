@@ -21,7 +21,7 @@ export class BuyerDashboardComponent implements OnInit {
   }
   checkout(){
     this.router.navigate(['/buyer/cart',this.FromRoute])
-    console.log(this.router.navigate(['/buyer/cart',this.FromRoute]))
+    // console.log(this.router.navigate(['/buyer/cart',this.FromRoute]))
   }
   ngOnInit(): void {
     this.routeParams = this.route.snapshot.paramMap;

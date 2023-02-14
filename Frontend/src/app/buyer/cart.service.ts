@@ -10,16 +10,17 @@ import { Observable } from 'rxjs';
 export class CartService {
   
   items: Product[]=[] ;
-  
+  private baseUrl="http://127.0.0.1:8000/"
 
   constructor( private http:HttpClient,private editProduct:EditProductService) { }
   
-  addToCart(product: Product) {
-    this.items.push(product);
+  addToCart(endpoint:string,product: Product) {
+    return this.http.post(this.baseUrl+endpoint,product)
+    // this.items.push(product);
   }
 
-  getItems() {
-    return this.items;
+  getItems(endpoint:string) {
+    return this.http.get(this.baseUrl+endpoint)
   }
 
   remove(product: Product){
@@ -29,9 +30,8 @@ export class CartService {
 
   }
 
-  clearCart() {
-    this.items = [];
-    return this.items;
+  clearCart(endpoint:string) {
+    return this.http.delete(this.baseUrl+endpoint)
   }
 
 }

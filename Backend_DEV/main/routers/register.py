@@ -3,7 +3,7 @@ import schemas,models,database
 from hashing import hash
 from sqlalchemy.orm import Session
 
-router=APIRouter()
+router=APIRouter(tags=['Register'])
 get_db=database.get_db
 
 @router.post('/register')

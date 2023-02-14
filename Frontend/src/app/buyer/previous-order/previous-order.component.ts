@@ -24,7 +24,7 @@ export class PreviousOrderComponent implements OnInit {
     ){}
   ngOnInit(): void {
     this.orderService.getOrder('user/previousOrder/'+this.FromRoute).subscribe(orders=>{
-      // console.log(orders);
+      console.log(orders);
       this.previousOrders=orders;
       // console.log(this.previousOrders[0].products)
     });

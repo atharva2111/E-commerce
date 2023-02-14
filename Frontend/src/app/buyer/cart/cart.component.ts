@@ -9,9 +9,17 @@ import { OrderService} from '../order.service'
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit{
-  items = this.cartService.getItems();
-  ngOnInit(){}
-
+  products:Product[]=[];
+  carts:any;
+  ngOnInit(){
+    this.cartService.getItems('user/cart/'+this.FromRoute).subscribe(res=>{
+      console.log(res);
+      this.carts=res;
+      console.log(this.carts);
+      
+    });
+  }
+  
   constructor(
     private route:ActivatedRoute,
     private router:Router,
@@ -22,20 +30,23 @@ export class CartComponent implements OnInit{
   routeParams = this.route.snapshot.paramMap;
   FromRoute = String(this.routeParams.get('username'));
 
-  removeFromCart(product:Product){
-    this.cartService.remove(product);
-    window.alert('Your product has been removed from the cart!');
-  }
+  // removeFromCart(product:Product){
+  //   // this.cartService.remove(product);
+  //   window.alert('Your product has been removed from the cart!');
+  // }
   OrderPlaced(){
      // add logic to add this order to orders. 
-    this.orderService.PlaceOrder('user/previousOrder/'+this.FromRoute,this.cartService.getItems()).subscribe(res=>{})
-    this.cartService.clearCart();
+    for(let i=0;i<this.carts.length;i++){
+      this.products[i]=this.carts[i].products;
+    }
+    this.orderService.PlaceOrder('user/previousOrder/'+this.FromRoute,this.products).subscribe(res=>{})
+    this.cartService.clearCart('user/cart/'+this.FromRoute).subscribe(res=>{});
     window.alert('Your order has been placed!');
     this.router.navigate(['/buyer',this.FromRoute]);
   }
   clearCart(){
-    this.cartService.clearCart();
-    this.items = this.cartService.getItems();
+    this.cartService.clearCart('user/cart/'+this.FromRoute).subscribe(res=>{});
+    // this.items = this.cartService.getItems();
     this.router.navigate(['/buyer',this.FromRoute]);
     window.alert('Your cart has been cleared!');
   }

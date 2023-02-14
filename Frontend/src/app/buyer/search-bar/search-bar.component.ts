@@ -30,17 +30,15 @@ export class SearchBarComponent implements OnInit {
     this.getProducts()
 
   }
-  
+  private routeParams = this.route.snapshot.paramMap;
+  private FromRoute = String(this.routeParams.get('username'));
     
   getProducts(){
     this.editProduct.getProductsList('products').subscribe(products=>this.products=products);
   }
-  
-  details(name:string){
-    this.router.navigate(['products',name])
-  }
+
   addToCart(product: Product) {
-    this.cartService.addToCart(product);
+    this.cartService.addToCart('user/cart/'+this.FromRoute,product).subscribe(res=>{});
     window.alert('Your product has been added to the cart!');
 
   }

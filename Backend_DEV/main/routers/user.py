@@ -48,7 +48,7 @@ def login(request:schemas.Login,db:Session=Depends(get_db)):
     return {"access_token": access_token,"token_type":"Bearer"}
 
 
-@router.post("/user/previousOrder/{username}")
+@router.post("/user/previousOrder/{username}",tags=['Previous Order'])
 def addOrder(username:str,request:List[schemas.showProduct],db:Session=Depends(get_db)):
     totalCalc=0
     user=db.query(models.User).filter(models.User.username==username).first()
@@ -64,8 +64,33 @@ def addOrder(username:str,request:List[schemas.showProduct],db:Session=Depends(g
     db.refresh(new_order)
     return new_order
 
-@router.get("/user/previousOrder/{username}")
+@router.get("/user/previousOrder/{username}",tags=['Previous Order'])
 def getOrders(username:str,db:Session=Depends(get_db)):
     user=db.query(models.User).filter(models.User.username==username).first()
     previous_order=db.query(models.PreviousOrder).filter(models.PreviousOrder.user_id==user.id).all()
     return previous_order
+
+@router.get("/user/cart/{username}",tags=['Carts'])
+def showCart(username:str,db:Session=Depends(get_db)):
+    user=db.query(models.User).filter(models.User.username==username).first()
+    cart=db.query(models.Cart).filter(models.Cart.user_id==user.id).all()
+    return cart
+
+@router.post("/user/cart/{username}",tags=['Carts'])
+def addToCart(username:str,request:schemas.showProduct,db:Session=Depends(get_db)):
+    user=db.query(models.User).filter(models.User.username==username).first()
+    new_cart=models.Cart(
+                        products=request,
+                        user_id=user.id
+                        )
+    db.add(new_cart)
+    db.commit()
+    db.refresh(new_cart)
+    return new_cart
+
+@router.delete('/user/cart/{username}',tags=['Carts'])
+def emptyCart(username:str,db:Session=Depends(get_db)):
+    user=db.query(models.User).filter(models.User.username==username).first()
+    db.query(models.Cart).filter(models.Cart.user_id==user.id).delete()
+    db.commit()
+    return {"status":"done"}
