@@ -5,9 +5,9 @@
   <br>
   <div class="product-item" *ngFor="let product of order.products">
     <span>{{product.name}}</span><br>
-    <span>{{product.price | currency }}</span><br>
+    <span>{{product.price | currency:"INR" }}</span><br>
   </div>
-  <span class="order-item">Total = {{order.total | currency}}</span>
+  <span class="order-item">Total = {{order.total | currency:"INR"}}</span>
   <br><br>
   <br><br>
 </div>
