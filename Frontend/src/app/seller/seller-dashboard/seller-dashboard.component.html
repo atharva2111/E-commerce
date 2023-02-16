@@ -15,7 +15,7 @@
         <tbody>
         <tr *ngFor="let product of products ">
           <td>{{ product.name }}</td>
-          <td>{{product.price | currency:'USD' }}</td>
+          <td>{{product.price | currency: "INR" }}</td>
           <td><button (click)="removeProduct(product.name)">Remove</button></td>
           <td><button (click)="updateProduct(product)">Update</button></td>
         </tr>
